@@ -42,12 +42,12 @@ public class ClienteController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<ClienteModel>> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Optional<ClienteModel>> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok().body(repository.findById(id));
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id,
+	public ResponseEntity<Void> atualizar(@PathVariable Long id,
 			@Valid @RequestBody ClienteModel clienteAtualizado) {
 		clienteAtualizado.setId(id);
 		repository.save(clienteAtualizado);
@@ -55,7 +55,7 @@ public class ClienteController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

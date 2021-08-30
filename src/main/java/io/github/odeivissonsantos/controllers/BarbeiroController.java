@@ -42,19 +42,19 @@ public class BarbeiroController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<BarbeiroModel>> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Optional<BarbeiroModel>> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok().body(repository.findById(id));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @Valid @RequestBody BarbeiroModel barbeiroAtualizado) {
+	public ResponseEntity<Void> atualizar(@PathVariable Long id, @Valid @RequestBody BarbeiroModel barbeiroAtualizado) {
 		barbeiroAtualizado.setId(id);
 		repository.save(barbeiroAtualizado);
 		return ResponseEntity.noContent().build();	
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Integer id){
+	public ResponseEntity<Void> deletar(@PathVariable Long id){
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

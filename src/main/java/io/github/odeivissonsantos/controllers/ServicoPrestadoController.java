@@ -41,12 +41,12 @@ public class ServicoPrestadoController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<ServicoPrestadoModel>> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Optional<ServicoPrestadoModel>> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok().body(repository.findById(id));
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id,
+	public ResponseEntity<Void> atualizar(@PathVariable Long id,
 			@Valid @RequestBody ServicoPrestadoModel servicoPrestadoAtualizado) {
 		servicoPrestadoAtualizado.setId(id);
 		repository.save(servicoPrestadoAtualizado);
@@ -54,7 +54,7 @@ public class ServicoPrestadoController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
