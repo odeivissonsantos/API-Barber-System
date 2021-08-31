@@ -3,8 +3,6 @@ package io.github.odeivissonsantos.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +35,7 @@ public class BarbeiroController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PessoaModel> salvar(@Valid @RequestBody BarbeiroModel barbeiro) {
+	public ResponseEntity<PessoaModel> salvar(@RequestBody BarbeiroModel barbeiro) {
 		return ResponseEntity.created(null).body(repository.save(barbeiro));
 	}
 	
@@ -47,7 +45,7 @@ public class BarbeiroController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Long id, @Valid @RequestBody BarbeiroModel barbeiroAtualizado) {
+	public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody BarbeiroModel barbeiroAtualizado) {
 		barbeiroAtualizado.setId(id);
 		repository.save(barbeiroAtualizado);
 		return ResponseEntity.noContent().build();	

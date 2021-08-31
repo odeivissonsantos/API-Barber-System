@@ -3,8 +3,6 @@ package io.github.odeivissonsantos.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +35,7 @@ public class ClienteController {
 	}
 
 	@PostMapping
-	public ResponseEntity<PessoaModel> salvar(@Valid @RequestBody ClienteModel cliente) {
+	public ResponseEntity<PessoaModel> salvar( @RequestBody ClienteModel cliente) {
 		return ResponseEntity.created(null).body(repository.save(cliente));
 	}
 
@@ -48,7 +46,7 @@ public class ClienteController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Long id,
-			@Valid @RequestBody ClienteModel clienteAtualizado) {
+			 @RequestBody ClienteModel clienteAtualizado) {
 		clienteAtualizado.setId(id);
 		repository.save(clienteAtualizado);
 		return ResponseEntity.noContent().build();
