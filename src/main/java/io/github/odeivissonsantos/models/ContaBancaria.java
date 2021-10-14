@@ -2,10 +2,7 @@ package io.github.odeivissonsantos.models;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import lombok.AllArgsConstructor;
+import io.github.odeivissonsantos.enums.TipoConta;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,8 +27,8 @@ public class ContaBancaria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	private TipoConta tipoConta;
 	
 	@Column
 	private String agencia;
