@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "servico_prestado")
+@Table(name = "tb_servico_prestado")
 public class ServicoPrestado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,11 +29,11 @@ public class ServicoPrestado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "nome")
 	private BigDecimal nome;
 
-	@Column
-	private String descricao;
+	@Column(name = "preco")
+	private BigDecimal preco;
 	
 	@OneToOne(mappedBy = "servicoPrestado")
 	private Agendamento agendamento;

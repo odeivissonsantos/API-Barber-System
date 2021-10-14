@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "conta_bancaria")
+@Table(name = "tb_conta_bancaria")
 public class ContaBancaria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,14 +30,14 @@ public class ContaBancaria implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoConta tipoConta;
 	
-	@Column
+	@Column(name = "agencia")
 	private String agencia;
 	
-	@Column
+	@Column(name = "numero")
 	private String numero;
 	
-	@Column
-	private String pix;
+	@Column(name = "chave_pix")
+	private String chavePix;
 	
 	@OneToOne(mappedBy = "contaBancaria")
 	private Barbeiro barbeiro;

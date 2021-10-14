@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "barbeiro")
+@Table(name = "tb_barbeiro")
 public class Barbeiro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,16 +27,16 @@ public class Barbeiro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "nome_completo")
 	private String nomeCompleto;
 
-	@Column
+	@Column(name = "cpf")
 	private String cpf;
 
-	@Column
+	@Column(name = "email")
 	private String email;
 
-	@Column
+	@Column(name = "telefone")
 	private String telefone;
 
 	@Column(updatable = false)
