@@ -3,8 +3,11 @@ package io.github.odeivissonsantos.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -27,15 +30,21 @@ public class Barbeiro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "O campo NOME COMPLETO é obrigatório!")
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
 
+	@NotNull(message = "O campo CPF é obrigatório!")
+	@CPF(message = "Digite um CPF válido!")
 	@Column(name = "cpf")
 	private String cpf;
 
+	@NotNull(message = "O campo EMAIL é obrigatório!")
+	@Email(message = "Digite um EMAIL válido!")
 	@Column(name = "email")
 	private String email;
 
+	@NotNull(message = "O campo TELEFONE é obrigatório!")
 	@Column(name = "telefone")
 	private String telefone;
 

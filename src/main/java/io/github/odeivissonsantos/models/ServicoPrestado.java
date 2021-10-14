@@ -1,6 +1,7 @@
 package io.github.odeivissonsantos.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,9 +30,11 @@ public class ServicoPrestado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "O campo NOME é obrigatório!")
 	@Column(name = "nome")
 	private BigDecimal nome;
 
+	@NotNull(message = "O campo PREÇO é obrigatório!")
 	@Column(name = "preco")
 	private BigDecimal preco;
 	
