@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.github.odeivissonsantos.models.Agendamento;
 import io.github.odeivissonsantos.models.BarbeiroModel;
 import io.github.odeivissonsantos.models.ClienteModel;
-import io.github.odeivissonsantos.models.ServicoPrestadoModel;
+import io.github.odeivissonsantos.models.ServicoPrestado;
 import io.github.odeivissonsantos.repositorys.AgendamentoRepository;
 import io.github.odeivissonsantos.repositorys.BarbeiroRepository;
 import io.github.odeivissonsantos.repositorys.ClienteRepository;
@@ -46,7 +46,7 @@ public class AgendamentoController {
 	public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento agendamento) {
 		BarbeiroModel barbeiro = barbeiroRepository.findById(agendamento.getBarbeiroId()).orElse(null);
 		ClienteModel cliente = clienteRepository.findById(agendamento.getClienteId()).orElse(null);
-		ServicoPrestadoModel servicoPrestado = servicoPrestadoRepository.findById(agendamento.getServicoPrestadoId()).orElse(null);
+		ServicoPrestado servicoPrestado = servicoPrestadoRepository.findById(agendamento.getServicoPrestadoId()).orElse(null);
 
 		agendamento.setBarbeiro(barbeiro);
 		agendamento.setCliente(cliente);

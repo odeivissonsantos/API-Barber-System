@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.odeivissonsantos.models.ClienteModel;
-import io.github.odeivissonsantos.models.PessoaModel;
 import io.github.odeivissonsantos.repositorys.ClienteRepository;
 
 @RestController

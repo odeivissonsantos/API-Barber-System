@@ -2,14 +2,13 @@ package io.github.odeivissonsantos.models;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author: Deivisson Santos
@@ -19,33 +18,24 @@ import java.io.Serializable;
  */
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
-@Table(name = "conta_bancaria")
-public class ContaBancaria implements Serializable {
+@Table(name = "servico_prestado")
+public class ServicoPrestado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
-	private String tipo;
-	
+	private BigDecimal nome;
+
 	@Column
-	private String agencia;
+	private String descricao;
 	
-	@Column
-	private String numero;
-	
-	@Column
-	private String pix;
-	
-	@OneToOne(mappedBy = "contaBancaria")
-	private Barbeiro barbeiro;
-	
-	
-	
+	@OneToOne(mappedBy = "servicoPrestado")
+	private Agendamento agendamento;
 
 }

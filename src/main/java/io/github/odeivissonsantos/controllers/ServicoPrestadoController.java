@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.odeivissonsantos.models.ServicoPrestadoModel;
+import io.github.odeivissonsantos.models.ServicoPrestado;
 import io.github.odeivissonsantos.repositorys.ServicoPrestadoRepository;
 
 @RestController
@@ -29,23 +29,23 @@ public class ServicoPrestadoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ServicoPrestadoModel>> listarTodos() {
+	public ResponseEntity<List<ServicoPrestado>> listarTodos() {
 		return ResponseEntity.ok().body(repository.findAll());
 	}
 
 	@PostMapping
-	public ResponseEntity<ServicoPrestadoModel> salvar(@RequestBody ServicoPrestadoModel servicoPrestado) {
+	public ResponseEntity<ServicoPrestado> salvar(@RequestBody ServicoPrestado servicoPrestado) {
 		return ResponseEntity.created(null).body(repository.save(servicoPrestado));
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<ServicoPrestadoModel>> buscarPorId(@PathVariable Long id) {
+	public ResponseEntity<Optional<ServicoPrestado>> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok().body(repository.findById(id));
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Long id,
-			 @RequestBody ServicoPrestadoModel servicoPrestadoAtualizado) {
+			 @RequestBody ServicoPrestado servicoPrestadoAtualizado) {
 		servicoPrestadoAtualizado.setId(id);
 		repository.save(servicoPrestadoAtualizado);
 		return ResponseEntity.noContent().build();
