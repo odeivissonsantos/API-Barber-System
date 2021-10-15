@@ -1,8 +1,7 @@
 package io.github.odeivissonsantos.repositorys;
 
+import io.github.odeivissonsantos.models.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import io.github.odeivissonsantos.models.ServicoPrestado;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface ServicoPrestadoRepository extends JpaRepository<ServicoPrestado, Long> {
-
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 }

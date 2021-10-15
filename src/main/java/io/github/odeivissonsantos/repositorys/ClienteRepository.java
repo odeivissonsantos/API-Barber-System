@@ -1,9 +1,17 @@
 package io.github.odeivissonsantos.repositorys;
 
+import io.github.odeivissonsantos.models.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import io.github.odeivissonsantos.models.ClienteModel;
+/**
+ * @author: Deivisson Santos
+ * @version: 2.0
+ * @Email: deivissonsantos@hotmail.com
+ * @Contato: (71) 99188-8419 (WhatsApp)
+ */
 
-public interface ClienteRepository extends JpaRepository<ClienteModel, Long> {
+@Repository
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
 }

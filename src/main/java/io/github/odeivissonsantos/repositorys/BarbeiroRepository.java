@@ -1,9 +1,17 @@
 package io.github.odeivissonsantos.repositorys;
 
+import io.github.odeivissonsantos.models.Barbeiro;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import io.github.odeivissonsantos.models.BarbeiroModel;
+/**
+ * @author: Deivisson Santos
+ * @version: 2.0
+ * @Email: deivissonsantos@hotmail.com
+ * @Contato: (71) 99188-8419 (WhatsApp)
+ */
 
-public interface BarbeiroRepository extends JpaRepository<BarbeiroModel, Long> {
+@Repository
+public interface BarbeiroRepository extends JpaRepository<Barbeiro, Long> {
 
 }
