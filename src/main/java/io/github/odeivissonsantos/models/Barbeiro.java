@@ -36,12 +36,12 @@ public class Barbeiro implements Serializable {
 
 	@NotNull(message = "O campo CPF é obrigatório!")
 	@CPF(message = "Digite um CPF válido!")
-	@Column(name = "cpf")
+	@Column(name = "cpf", unique = true)
 	private String cpf;
 
 	@NotNull(message = "O campo EMAIL é obrigatório!")
 	@Email(message = "Digite um EMAIL válido!")
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@NotNull(message = "O campo TELEFONE é obrigatório!")
