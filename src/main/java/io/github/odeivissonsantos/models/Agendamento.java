@@ -30,15 +30,12 @@ public class Agendamento implements Serializable {
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn
 	private Barbeiro barbeiro;
 	
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn
 	private Cliente cliente;
 	
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn
 	private ServicoPrestado servicoPrestado;
 	
 	@Column

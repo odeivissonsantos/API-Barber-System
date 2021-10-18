@@ -58,7 +58,4 @@ public class Barbeiro implements Serializable {
 	@JsonManagedReference
 	private ContaBancaria contaBancaria;
 
-	@OneToOne(mappedBy = "barbeiro")
-	private Agendamento agendamento;
-
 }

@@ -70,7 +70,7 @@ public class ServicoPrestadoService {
     private void atualizaData(ServicoPrestado newObj, ServicoPrestado obj) {
         newObj.setNome(obj.getNome());
         newObj.setPreco(obj.getPreco());
-        newObj.setAgendamento(obj.getAgendamento());
+       // newObj.setAgendamento(obj.getAgendamento());
     }
 
     /*

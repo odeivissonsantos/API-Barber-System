@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -26,9 +27,15 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "nome", unique = true)
+    @NotNull(message = "Campo NOME é Obrigatório!")
     private String nome;
 
-    @Column
+    @Column(name = "codigo_ean", unique = true)
+    @NotNull(message = "Campo NOME é Obrigatório!")
+    private String codigoEan;
+
+    @Column(name = "preco")
+    @NotNull(message = "Campo PREÇO é Obrigatório!")
     private BigDecimal preco;
 }

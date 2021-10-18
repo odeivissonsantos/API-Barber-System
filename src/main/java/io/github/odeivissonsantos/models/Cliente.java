@@ -53,7 +53,4 @@ public class Cliente implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyy")
 	private LocalDate dataCadastro;
 
-	@OneToOne(mappedBy = "cliente")
-	private Agendamento agendamento;
-
 }

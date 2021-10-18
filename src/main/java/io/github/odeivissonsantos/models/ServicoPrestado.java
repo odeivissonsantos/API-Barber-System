@@ -37,8 +37,5 @@ public class ServicoPrestado implements Serializable {
 	@NotNull(message = "O campo PREÇO é obrigatório!")
 	@Column(name = "preco")
 	private BigDecimal preco;
-	
-	@OneToOne(mappedBy = "servicoPrestado")
-	private Agendamento agendamento;
 
 }
