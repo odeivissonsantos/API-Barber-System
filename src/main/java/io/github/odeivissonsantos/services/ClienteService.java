@@ -35,7 +35,7 @@ public class ClienteService {
      * @param: id
      * @return: Busca um Cliente na base de dados.
      */
-    public Cliente buscarClientePorId(Long id) throws ObjectNotFoundException {
+    public Cliente buscarClientePorId(Long id) {
         return this.verificaSeExisteCliente(id);
     }
 

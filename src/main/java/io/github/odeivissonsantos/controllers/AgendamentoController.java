@@ -3,6 +3,8 @@ package io.github.odeivissonsantos.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.odeivissonsantos.models.Barbeiro;
+import io.github.odeivissonsantos.models.Cliente;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.odeivissonsantos.models.Agendamento;
-import io.github.odeivissonsantos.models.BarbeiroModel;
-import io.github.odeivissonsantos.models.ClienteModel;
 import io.github.odeivissonsantos.models.ServicoPrestado;
 import io.github.odeivissonsantos.repositorys.AgendamentoRepository;
 import io.github.odeivissonsantos.repositorys.BarbeiroRepository;
@@ -44,9 +44,9 @@ public class AgendamentoController {
 	
 	@PostMapping
 	public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento agendamento) {
-		BarbeiroModel barbeiro = barbeiroRepository.findById(agendamento.getBarbeiroId()).orElse(null);
-		ClienteModel cliente = clienteRepository.findById(agendamento.getClienteId()).orElse(null);
-		ServicoPrestado servicoPrestado = servicoPrestadoRepository.findById(agendamento.getServicoPrestadoId()).orElse(null);
+		Barbeiro barbeiro = barbeiroRepository.findById(agendamento.getBarbeiro().getId()).orElse(null);
+		Cliente cliente = clienteRepository.findById(agendamento.getCliente().getId()).orElse(null);
+		ServicoPrestado servicoPrestado = servicoPrestadoRepository.findById(agendamento.getServicoPrestado().getId()).orElse(null);
 
 		agendamento.setBarbeiro(barbeiro);
 		agendamento.setCliente(cliente);
