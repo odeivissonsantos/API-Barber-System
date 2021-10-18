@@ -84,7 +84,7 @@ public class BarbeiroService {
      */
     private Barbeiro verificaSeExisteBarbeiro(Long id) throws ObjectNotFoundException {
         return barbeiroRepository.findById(id)
-            .orElseThrow(() -> new ObjectNotFoundException("Cliente com id: "+ id +" não encontrado, Tipo: " + Barbeiro.class.getName()));
+            .orElseThrow(() -> new ObjectNotFoundException("Barbeiro com id: "+ id +" não encontrado, Tipo: " + Barbeiro.class.getName()));
     }
 
 

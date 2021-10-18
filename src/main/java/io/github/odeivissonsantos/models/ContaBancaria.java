@@ -47,7 +47,7 @@ public class ContaBancaria implements Serializable {
 	@Column(name = "chave_pix")
 	private String chavePix;
 	
-	@OneToOne(mappedBy = "contaBancaria")
+	@OneToOne(mappedBy = "contaBancaria", cascade = CascadeType.PERSIST)
 	@JsonBackReference
 	private Barbeiro barbeiro;
 
