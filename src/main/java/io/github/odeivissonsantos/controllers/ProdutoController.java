@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,10 @@ public class ProdutoController {
         @ApiResponse(responseCode = "200", description = "Lista com todos produtos")
     })
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> listarTodosProdutos() {
+    public ResponseEntity<List<Produto>> listarTodosProdutos() {
         List<Produto> list = produtoService.listarTodosProdutos();
         List<ProdutoDTO> listDTO = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDTO);
+        return ResponseEntity.ok().body(produtoService.listarTodosProdutos());
     }
 
     @Operation(description = "Retorna um produto por ID")
@@ -58,7 +59,7 @@ public class ProdutoController {
         @ApiResponse(responseCode = "201", description = "Cria um novo produto")
     })
     @PostMapping
-    public ResponseEntity<Produto> criarProduto(@RequestBody Produto obj) {
+    public ResponseEntity<Produto> criarProduto(@Valid @RequestBody Produto obj) {
         Produto newObj = produtoService.criarProduto(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(newObj);
@@ -69,7 +70,7 @@ public class ProdutoController {
         @ApiResponse(responseCode = "200", description = "Atualiza um produto cadastrado base de dados")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto obj){
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto obj){
         Produto newObj = produtoService.atualizarProduto(id, obj);
         return ResponseEntity.ok().body(newObj);
     }

@@ -20,7 +20,7 @@ public class ProdutoService {
      * @return: Retorna uma lista de produtos cadastrados na base de dados.
      */
     public List<Produto> listarTodosProdutos() {
-        return (List<Produto>) produtoRepository.findAll();
+        return produtoRepository.findAll();
     }
 
     /*

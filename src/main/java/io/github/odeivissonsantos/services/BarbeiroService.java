@@ -33,7 +33,7 @@ public class BarbeiroService {
 
     /*
      * @param: id
-     * @return: Busca um Baribeiro na base de dados.
+     * @return: Busca um Barbeiro na base de dados.
      */
     public Barbeiro buscarBarbeiroPorId(Long id) {
         return this.verificaSeExisteBarbeiro(id);
