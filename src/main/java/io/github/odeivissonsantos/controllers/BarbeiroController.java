@@ -2,13 +2,10 @@ package io.github.odeivissonsantos.controllers;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
+import java.util.stream.Collectors;
 import io.github.odeivissonsantos.dtos.BarbeiroDTO;
-import io.github.odeivissonsantos.dtos.ClienteDTO;
 import io.github.odeivissonsantos.models.Barbeiro;
-import io.github.odeivissonsantos.models.Cliente;
 import io.github.odeivissonsantos.services.BarbeiroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

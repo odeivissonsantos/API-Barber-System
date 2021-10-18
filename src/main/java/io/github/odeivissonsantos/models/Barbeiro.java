@@ -1,6 +1,8 @@
 package io.github.odeivissonsantos.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
@@ -52,8 +54,8 @@ public class Barbeiro implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyy")
 	private LocalDate dataCadastro;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private ContaBancaria contaBancaria;
 
 	@OneToOne(mappedBy = "barbeiro")

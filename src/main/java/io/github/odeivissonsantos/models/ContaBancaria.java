@@ -3,6 +3,7 @@ package io.github.odeivissonsantos.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.odeivissonsantos.enums.TipoConta;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,7 @@ public class ContaBancaria implements Serializable {
 	private String chavePix;
 	
 	@OneToOne(mappedBy = "contaBancaria")
+	@JsonBackReference
 	private Barbeiro barbeiro;
 
 }
