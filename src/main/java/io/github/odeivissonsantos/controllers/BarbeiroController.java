@@ -1,9 +1,18 @@
 package io.github.odeivissonsantos.controllers;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import io.github.odeivissonsantos.dtos.BarbeiroDTO;
+import io.github.odeivissonsantos.dtos.ClienteDTO;
 import io.github.odeivissonsantos.models.Barbeiro;
+import io.github.odeivissonsantos.models.Cliente;
+import io.github.odeivissonsantos.services.BarbeiroService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,47 +23,73 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import io.github.odeivissonsantos.repositorys.BarbeiroRepository;
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/barbeiros")
+@RequestMapping(value = "/api/v2/barbeiros")
 public class BarbeiroController {
 	
-	public final BarbeiroRepository repository;
-	
-	public BarbeiroController(BarbeiroRepository repository) {
-		this.repository = repository;
+	public final BarbeiroService barbeiroService;
+
+	public BarbeiroController(BarbeiroService barbeiroService) {
+		this.barbeiroService = barbeiroService;
 	}
 
+
+	@Operation(description = "Lista todos os barbeiros cadastrados na base de dados")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Lista com todos barbeiros")
+	})
 	@GetMapping
-	public ResponseEntity<List<Barbeiro>> listarTodos(){
-		return ResponseEntity.ok().body(repository.findAll());
+	public ResponseEntity<List<Barbeiro>> listarTodosBarbeiros() {
+		List<Barbeiro> list = barbeiroService.listarTodosBarbeiros();
+		List<BarbeiroDTO> listDTO = list.stream().map(obj -> new BarbeiroDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(barbeiroService.listarTodosBarbeiros());
 	}
-	
+
+	@Operation(description = "Retorna um barbeiro por ID")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Lista os detalhes de um barbeiro por ID")
+	})
+	@GetMapping("/{id}")
+	public ResponseEntity<Barbeiro> buscarBarbeiroPorId(@PathVariable Long id) {
+		Barbeiro obj = barbeiroService.buscarBarbeiroPorId(id);
+		return ResponseEntity.ok().body(obj);
+	}
+
+	@Operation(description = "Insere um novo barbeiro na base de dados")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "201", description = "Cria um novo barbeiro")
+	})
 	@PostMapping
-	public ResponseEntity<Barbeiro> salvar(@RequestBody Barbeiro barbeiro) {
-		return ResponseEntity.created(null).body(repository.save(barbeiro));
+	public ResponseEntity<Barbeiro> criarBarbeiro(@Valid @RequestBody Barbeiro obj) {
+		Barbeiro newObj= barbeiroService.criarBarbeiro(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).body(newObj);
 	}
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<Barbeiro>> buscarPorId(@PathVariable Long id) {
-		return ResponseEntity.ok().body(repository.findById(id));
+
+	@Operation(description = "Atualiza um barbeiro")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Atualiza um barbeiro cadastrado base de dados")
+	})
+	@PutMapping("/{id}")
+	public ResponseEntity<Barbeiro> atualizarBarbeiro(@PathVariable Long id,
+													@Valid @RequestBody Barbeiro obj) {
+		Barbeiro newObj = barbeiroService.atualizarBarbeiro(id, obj);
+		return ResponseEntity.ok().body(newObj);
 	}
-	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Barbeiro barbeiroAtualizado) {
-		barbeiroAtualizado.setId(id);
-		repository.save(barbeiroAtualizado);
-		return ResponseEntity.noContent().build();	
-	}
-	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Long id){
-		repository.deleteById(id);
+
+	@Operation(description = "Exclui um barbeiro")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "204", description = "Exclui um barbeiro passando uum id")
+	})
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deletarBarbeiro(@PathVariable Long id) {
+		barbeiroService.deletarBarbeiro(id);
 		return ResponseEntity.noContent().build();
 	}
-
 
 }
