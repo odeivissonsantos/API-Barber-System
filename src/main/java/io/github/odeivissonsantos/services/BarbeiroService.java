@@ -2,7 +2,6 @@ package io.github.odeivissonsantos.services;
 
 import io.github.odeivissonsantos.exceptions.ObjectNotFoundException;
 import io.github.odeivissonsantos.models.Barbeiro;
-import io.github.odeivissonsantos.models.Cliente;
 import io.github.odeivissonsantos.repositorys.BarbeiroRepository;
 import org.springframework.stereotype.Service;
 

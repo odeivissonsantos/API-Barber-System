@@ -3,6 +3,7 @@ package io.github.odeivissonsantos.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.odeivissonsantos.services.ServicoPrestadoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,17 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.odeivissonsantos.models.ServicoPrestado;
-import io.github.odeivissonsantos.repositorys.ServicoPrestadoRepository;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/servicos-prestados")
+@RequestMapping(value = "/api/v2/servicos-prestados")
 public class ServicoPrestadoController {
 
-	public final ServicoPrestadoRepository repository;
+	public final ServicoPrestadoService servicoPrestadoService;
 
-	public ServicoPrestadoController(ServicoPrestadoRepository repository) {
-		this.repository = repository;
+	public ServicoPrestadoController(ServicoPrestadoService servicoPrestadoService) {
+		this.servicoPrestadoService = servicoPrestadoService;
 	}
 
 	@GetMapping

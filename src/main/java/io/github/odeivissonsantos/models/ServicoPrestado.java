@@ -31,8 +31,8 @@ public class ServicoPrestado implements Serializable {
 	private Long id;
 
 	@NotNull(message = "O campo NOME é obrigatório!")
-	@Column(name = "nome")
-	private BigDecimal nome;
+	@Column(name = "nome", unique = true)
+	private String nome;
 
 	@NotNull(message = "O campo PREÇO é obrigatório!")
 	@Column(name = "preco")
