@@ -1,10 +1,15 @@
 package io.github.odeivissonsantos.controllers;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import io.github.odeivissonsantos.models.Barbeiro;
 import io.github.odeivissonsantos.models.Cliente;
+import io.github.odeivissonsantos.services.AgendamentoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,57 +23,76 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.odeivissonsantos.models.Agendamento;
 import io.github.odeivissonsantos.models.ServicoPrestado;
-import io.github.odeivissonsantos.repositorys.AgendamentoRepository;
-import io.github.odeivissonsantos.repositorys.BarbeiroRepository;
-import io.github.odeivissonsantos.repositorys.ClienteRepository;
-import io.github.odeivissonsantos.repositorys.ServicoPrestadoRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@RequiredArgsConstructor
+import javax.validation.Valid;
+
+/**
+ * @author: Deivisson Santos
+ * @version: 2.0
+ * @Email: deivissonsantos@hotmail.com
+ * @Contato: (71) 99188-8419 (WhatsApp)
+ */
+
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/agendamentos")
+@RequestMapping(value = "/api/v2/agendamentos")
 public class AgendamentoController {
 
-	
-	public final AgendamentoRepository repository;
-	public final BarbeiroRepository barbeiroRepository;
-	public final ClienteRepository clienteRepository;
-	public final ServicoPrestadoRepository servicoPrestadoRepository;
-	
+	private final AgendamentoService agendamentoService;
 
+	public AgendamentoController(AgendamentoService agendamentoService) {
+		this.agendamentoService = agendamentoService;
+	}
+
+	@Operation(description = "Lista todos os agendamentos cadastrados na base de dados")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Lista com todos agendamentos")
+	})
 	@GetMapping
-	public ResponseEntity<List<Agendamento>> listarTodos(){
-		return ResponseEntity.ok().body(repository.findAll());
+	public ResponseEntity<List<Agendamento>> listarTodosAgendamentos(){
+		return ResponseEntity.ok().body(agendamentoService.listarTodosAgendamentos());
 	}
-	
-	@PostMapping
-	public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento agendamento) {
-		Barbeiro barbeiro = barbeiroRepository.findById(agendamento.getBarbeiro().getId()).orElse(null);
-		Cliente cliente = clienteRepository.findById(agendamento.getCliente().getId()).orElse(null);
-		ServicoPrestado servicoPrestado = servicoPrestadoRepository.findById(agendamento.getServicoPrestado().getId()).orElse(null);
 
-		agendamento.setBarbeiro(barbeiro);
-		agendamento.setCliente(cliente);
-		agendamento.setServicoPrestado(servicoPrestado);
-		return ResponseEntity.created(null).body(repository.save(agendamento));
+	@Operation(description = "Retorna um agendamento por ID")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Lista os detalhes de um agendamento por ID")
+	})
+	@GetMapping("/{id}")
+	public ResponseEntity<Agendamento> buscarAgendamentoPorId(@PathVariable Long id) {
+		Agendamento obj = agendamentoService.buscarAgendamentoPorId(id);
+		return ResponseEntity.ok().body(obj);
 	}
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<Agendamento>> buscarPorId(@PathVariable Long id) {
-		return ResponseEntity.ok().body(repository.findById(id));
+
+	@Operation(description = "Insere um novo agendamento na base de dados")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "201", description = "Cria um novo agendamento")
+	})
+	@PostMapping
+	public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento obj) {
+		Agendamento newObj = agendamentoService.criarAgendamento(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).body(newObj);
 	}
-	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Agendamento agendamentoAtualizado) {
-		agendamentoAtualizado.setId(id);
-		repository.save(agendamentoAtualizado);
-		return ResponseEntity.noContent().build();	
+
+	@Operation(description = "Atualiza um agendamento")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Atualiza um agendamento cadastrado base de dados")
+	})
+	@PutMapping("/{id}")
+	public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable Long id,
+															@Valid @RequestBody Agendamento obj) {
+		Agendamento newObj = agendamentoService.atualizarAgendamento(id, obj);
+		return ResponseEntity.ok().body(newObj);
 	}
-	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Long id){
-		repository.deleteById(id);
+
+	@Operation(description = "Exclui um agendamento")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "204", description = "Exclui um agendamento passando uum id")
+	})
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deletarAgendamento(@PathVariable Long id) {
+		agendamentoService.deletarAgendamento(id);
 		return ResponseEntity.noContent().build();
 	}
 

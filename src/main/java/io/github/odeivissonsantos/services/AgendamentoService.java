@@ -47,7 +47,7 @@ public class AgendamentoService {
     /*
      * @return: Retorna a criação de um Agendamento na base de dados.
      */
-    public Agendamento criarBarbeiro(Agendamento obj) {
+    public Agendamento criarAgendamento(Agendamento obj) {
         Cliente cliente = clienteService.buscarClientePorId(obj.getCliente().getId());
         Barbeiro barbeiro = barbeiroService.buscarBarbeiroPorId(obj.getBarbeiro().getId());
         ServicoPrestado servicoPrestado = servicoPrestadoService.buscarServicoPorId(obj.getServicoPrestado().getId());
@@ -69,7 +69,7 @@ public class AgendamentoService {
      * @param: id e entidade
      * @return: Verifica se existe um chamado na base de dados e atualiza suas informações
      */
-    public Agendamento atualizarBarbeiro(Long id, Agendamento obj) {
+    public Agendamento atualizarAgendamento(Long id, Agendamento obj) {
         Agendamento newObj = verificaSeExisteAgendamento(id);
         atualizaData(newObj, obj);
         return agendamentoRepository.save(newObj);

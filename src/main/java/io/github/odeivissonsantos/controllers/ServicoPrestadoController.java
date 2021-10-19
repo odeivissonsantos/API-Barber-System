@@ -4,9 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.odeivissonsantos.dtos.BarbeiroDTO;
 import io.github.odeivissonsantos.dtos.ServicoPrestadoDTO;
-import io.github.odeivissonsantos.models.Barbeiro;
 import io.github.odeivissonsantos.services.ServicoPrestadoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,6 +24,13 @@ import io.github.odeivissonsantos.models.ServicoPrestado;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+
+/**
+ * @author: Deivisson Santos
+ * @version: 2.0
+ * @Email: deivissonsantos@hotmail.com
+ * @Contato: (71) 99188-8419 (WhatsApp)
+ */
 
 @RestController
 @CrossOrigin("*")

@@ -24,6 +24,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 
+/**
+ * @author: Deivisson Santos
+ * @version: 2.0
+ * @Email: deivissonsantos@hotmail.com
+ * @Contato: (71) 99188-8419 (WhatsApp)
+ */
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "/api/v2/barbeiros")
