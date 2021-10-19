@@ -1,3 +1,12 @@
+### Objetivos do Projeto:
+- Permitir cadastrar cliente;
+- Permitir cadastrar barbeiros;
+- Permitir cadastrar conta bancária e pix vinculada à um barbeiro;
+- Permitir cadastrar serviços à serem realizados;
+- Permitir cadastrar produtos;
+- Permitir cadastrar um agendamento contendo cliente, barbeiro e serviço;
+- Permitir cadastrar uma venda contendo cliente, barbeiro e produto;
+
 ### Tecnologias utilizadas no Projeto:
 - Java 11;
 - Spring Boot 2.x;
