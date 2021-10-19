@@ -5,6 +5,7 @@ import io.github.odeivissonsantos.models.*;
 import io.github.odeivissonsantos.repositorys.VendaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -55,14 +56,15 @@ public class VendaService {
         Barbeiro barbeiro = barbeiroService.buscarBarbeiroPorId(obj.getBarbeiro().getId());
         Produto produto = produtoService.buscarProdutoPorId(obj.getProduto().getId());
 
-        Agendamento agendamento = new Agendamento();
+        Venda venda = new Venda();
         if(obj.getId() != null) {
-            agendamento.setId(obj.getId());
+            venda.setId(obj.getId());
         }
 
         obj.setCliente(cliente);
         obj.setBarbeiro(barbeiro);
         obj.setProduto(produto);
+        obj.setData(LocalDate.now());
 
         obj = vendaRepository.save(obj);
         return obj;
