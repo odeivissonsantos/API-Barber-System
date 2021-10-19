@@ -17,12 +17,14 @@ public class ProdutoDTO implements Serializable {
 
     private Long id;
     private String nome;
+    private String marca;
     private BigDecimal preco;
     private String codigoEan;
 
     public ProdutoDTO(Produto obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();
+        this.marca = obj.getMarca();
         this.preco = obj.getPreco();
         this.codigoEan = obj.getCodigoEan();
     }

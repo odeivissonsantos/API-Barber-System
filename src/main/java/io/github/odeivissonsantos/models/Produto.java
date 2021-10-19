@@ -31,8 +31,12 @@ public class Produto implements Serializable {
     @NotNull(message = "Campo NOME é Obrigatório!")
     private String nome;
 
+    @Column(name = "marca")
+    @NotNull(message = "Campo MARCA é Obrigatório!")
+    private String marca;
+
     @Column(name = "codigo_ean", unique = true)
-    @NotNull(message = "Campo NOME é Obrigatório!")
+    @NotNull(message = "Campo CÓDIGO EAN é Obrigatório!")
     private String codigoEan;
 
     @Column(name = "preco")
