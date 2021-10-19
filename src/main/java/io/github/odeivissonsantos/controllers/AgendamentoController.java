@@ -2,10 +2,7 @@ package io.github.odeivissonsantos.controllers;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
-import io.github.odeivissonsantos.models.Barbeiro;
-import io.github.odeivissonsantos.models.Cliente;
 import io.github.odeivissonsantos.services.AgendamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.odeivissonsantos.models.Agendamento;
-import io.github.odeivissonsantos.models.ServicoPrestado;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -69,7 +65,7 @@ public class AgendamentoController {
 		@ApiResponse(responseCode = "201", description = "Cria um novo agendamento")
 	})
 	@PostMapping
-	public ResponseEntity<Agendamento> salvar(@RequestBody Agendamento obj) {
+	public ResponseEntity<Agendamento> criarAgendamento(@RequestBody Agendamento obj) {
 		Agendamento newObj = agendamentoService.criarAgendamento(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(newObj);
